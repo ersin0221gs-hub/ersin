@@ -1,0 +1,145 @@
+1. Soru 
+class Urun: 
+    def __init__(self, isim, fiyat, stok): 
+        self.isim = isim 
+        self.fiyat = fiyat 
+        self.stok = stok 
+ 
+class Sepet: 
+    def __init__(self): 
+        self.urunler = {} 
+ 
+    def urun_ekle(self, urun, adet): 
+        if urun.stok >= adet: 
+            if urun in self.urunler: 
+                self.urunler[urun] += adet 
+            else: 
+                self.urunler[urun] = adet 
+            urun.stok -= adet 
+        else: 
+            print("Stok yetersiz") 
+ 
+    def urun_sil(self, urun): 
+        if urun in self.urunler: 
+            adet = self.urunler[urun] 
+            urun.stok += adet 
+            del self.urunler[urun] 
+ 
+    def toplam_tutar(self): 
+        toplam = 0 
+        for urun, adet in self.urunler.items(): 
+            toplam += urun.fiyat * adet 
+        return toplam 
+ 
+2. Soru 
+class BankaHesabi: 
+    def __init__(self, isim, bakiye): 
+        self.isim = isim 
+        self.bakiye = bakiye 
+        self.hareket_gecmisi = [] 
+ 
+    def para_yatir(self, miktar): 
+        self.bakiye += miktar 
+        self.hareket_gecmisi.append(f"{miktar} TL yatırıldı") 
+ 
+    def para_cek(self, miktar): 
+        if miktar < 0: 
+            print("Negatif değer girilemez") 
+        elif miktar <= self.bakiye: 
+            self.bakiye -= miktar 
+            self.hareket_gecmisi.append(f"{miktar} TL çekildi") 
+        else: 
+            print("Bakiye yetersiz") 
+ 
+    def ozet(self): 
+        print(f"Güncel Bakiye: {self.bakiye}") 
+        for islem in self.hareket_gecmisi: 
+            print(islem) 
+ 
+3. Soru 
+class Kitap: 
+    def __init__(self, isim, yazar): 
+        self.isim = isim 
+        self.yazar = yazar 
+        self.durum = True 
+ 
+class Kullanici: 
+    def __init__(self, isim): 
+        self.isim = isim 
+        self.aldigi_kitaplar = [] 
+ 
+class Kutuphane: 
+    def __init__(self): 
+        self.kitaplar = [] 
+ 
+    def kitap_ekleme(self, kitap): 
+        self.kitaplar.append(kitap) 
+ 
+    def odunc_verme(self, kitap, kullanici): 
+        if len(kullanici.aldigi_kitaplar) < 2: 
+            if kitap.durum == True: 
+                kitap.durum = False 
+                kullanici.aldigi_kitaplar.append(kitap) 
+            else: 
+                print("Kitap şu an başkasında") 
+        else: 
+            print("En fazla 2 kitap alabilirsiniz") 
+ 
+    def iade_alma(self, kitap, kullanici): 
+        if kitap in kullanici.aldigi_kitaplar: 
+            kitap.durum = True 
+            kullanici.aldigi_kitaplar.remove(kitap) 
+ 
+4. Soru 
+class Arac: 
+    def __init__(self, marka, gunluk_fiyat): 
+        self.marka = marka 
+        self.gunluk_fiyat = gunluk_fiyat 
+        self.musait_mi = True 
+ 
+class Musteri: 
+    def __init__(self, isim): 
+        self.isim = isim 
+        self.kiraladigi_araclar = [] 
+ 
+    def arac_kirala(self, arac): 
+        if arac.musait_mi == True: 
+            arac.musait_mi = False 
+            self.kiraladigi_araclar.append(arac) 
+        else: 
+            print("Bu araç şu an kiralanamaz") 
+ 
+    def arac_iade_et(self, arac): 
+        if arac in self.kiraladigi_araclar: 
+            arac.musait_mi = True 
+            self.kiraladigi_araclar.remove(arac) 
+ 
+5. Soru 
+class Gorev: 
+    def __init__(self, baslik, aciklama): 
+        self.baslik = baslik 
+        self.aciklama = aciklama 
+        self.tamamlandi_mi = False 
+ 
+class Kullanici: 
+    def __init__(self, isim): 
+        self.isim = isim 
+        self.gorevler = [] 
+        self.tamamlanan_gorevler = [] 
+ 
+    def gorev_ekleme(self, gorev): 
+        for g in self.gorevler: 
+            if g.baslik == gorev.baslik: 
+                print("Bu görev listede zaten var") 
+                return 
+        self.gorevler.append(gorev) 
+ 
+    def gorev_silme(self, gorev): 
+        if gorev in self.gorevler: 
+            self.gorevler.remove(gorev) 
+ 
+    def gorev_tamamlama(self, gorev): 
+if gorev in self.gorevler: 
+gorev.tamamlandi_mi = True 
+self.tamamlanan_gorevler.append(gorev) 
+self.gorevler.remove(gorev)
